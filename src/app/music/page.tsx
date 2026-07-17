@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { PageHeader } from "@/components/ui/page-header";
 import { Reveal } from "@/components/motion/reveal";
@@ -5,7 +6,7 @@ import { NoirLink } from "@/components/ui/noir-link";
 import { SceneBackdrop } from "@/components/atmosphere/scene-backdrop";
 import { atmosphere, rotation } from "@/data/atmosphere";
 import { site } from "@/config/site";
-import { getSpotifyPlaylists } from "@/lib/spotify";
+import { getSpotifyPlaylists, getSpotifyShow } from "@/lib/spotify";
 import { getPageUi } from "@/lib/i18n-pages";
 import { resolvePageLang } from "@/lib/i18n-server";
 import { pageMetadata } from "@/lib/seo";
@@ -24,7 +25,10 @@ export default async function MusicPage({
 }) {
   const lang = await resolvePageLang(searchParams);
   const ui = getPageUi("music", lang);
-  const playlists = await getSpotifyPlaylists();
+  const [playlists, podcast] = await Promise.all([
+    getSpotifyPlaylists(),
+    getSpotifyShow(),
+  ]);
 
   return (
     <div className="relative overflow-hidden">
@@ -58,18 +62,35 @@ export default async function MusicPage({
                 href={site.socials.podcast}
                 target="_blank"
                 rel="noreferrer"
-                className="group relative z-10 flex flex-col justify-between gap-14 border border-line p-8 transition-colors duration-500 hover:bg-panel md:p-12"
+                className="group relative z-10 grid gap-8 border border-line p-8 transition-colors duration-500 hover:bg-panel md:grid-cols-[220px_1fr] md:p-12"
               >
-                <span className="font-mono text-xs text-faint">SHOW 01</span>
-                <span>
-                  <span className="display block text-2xl transition-colors duration-300 group-hover:text-amber md:text-3xl">
-                    {ui.podcastTitle}
-                  </span>
-                  <span className="mt-3 block max-w-2xl text-sm leading-relaxed text-muted">
-                    {ui.podcastBody}
-                  </span>
-                  <span className="mt-5 block font-mono text-[0.65rem] uppercase tracking-[0.18em] text-cyan">
-                    open.spotify.com/show
+                <span className="relative aspect-square overflow-hidden border border-line bg-panel">
+                  {podcast?.image ? (
+                    <Image
+                      src={podcast.image}
+                      alt={podcast.title}
+                      fill
+                      sizes="(min-width: 768px) 220px, calc(100vw - 4rem)"
+                      className="h-full w-full object-cover grayscale transition duration-500 group-hover:grayscale-0"
+                    />
+                  ) : (
+                    <span className="flex h-full w-full items-center justify-center font-mono text-xs uppercase tracking-[0.2em] text-faint">
+                      Podcast
+                    </span>
+                  )}
+                </span>
+                <span className="flex flex-col justify-between gap-14">
+                  <span className="font-mono text-xs text-faint">SHOW 01</span>
+                  <span>
+                    <span className="display block text-2xl transition-colors duration-300 group-hover:text-amber md:text-3xl">
+                      {podcast?.title ?? ui.podcastTitle}
+                    </span>
+                    <span className="mt-3 block max-w-2xl text-sm leading-relaxed text-muted">
+                      {ui.podcastBody}
+                    </span>
+                    <span className="mt-5 block font-mono text-[0.65rem] uppercase tracking-[0.18em] text-cyan">
+                      open.spotify.com/show
+                    </span>
                   </span>
                 </span>
               </a>

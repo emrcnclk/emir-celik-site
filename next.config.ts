@@ -2,6 +2,14 @@ import type { NextConfig } from "next";
 import { site } from "./src/config/site";
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "image-cdn-fa.spotifycdn.com",
+      },
+    ],
+  },
   async redirects() {
     return [
       {

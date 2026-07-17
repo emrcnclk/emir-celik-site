@@ -14,6 +14,17 @@ type SpotifyPlaylistResponse = {
   }>;
 };
 
+export type SpotifyShow = {
+  title: string;
+  image: string;
+  url: string;
+};
+
+type SpotifyOEmbedResponse = {
+  title?: string;
+  thumbnail_url?: string;
+};
+
 async function getAccessToken() {
   const id = process.env.SPOTIFY_CLIENT_ID;
   const secret = process.env.SPOTIFY_CLIENT_SECRET;
@@ -71,5 +82,28 @@ export async function getSpotifyPlaylists(): Promise<SpotifyPlaylist[]> {
     return [...curated, ...extras];
   } catch {
     return curated;
+  }
+}
+
+export async function getSpotifyShow(): Promise<SpotifyShow | null> {
+  try {
+    const url = site.socials.podcast;
+    const res = await fetch(
+      `https://open.spotify.com/oembed?url=${encodeURIComponent(url)}`,
+      { next: { revalidate: 60 * 60 } },
+    );
+
+    if (!res.ok) return null;
+
+    const data = (await res.json()) as SpotifyOEmbedResponse;
+    if (!data.title || !data.thumbnail_url) return null;
+
+    return {
+      title: data.title,
+      image: data.thumbnail_url,
+      url,
+    };
+  } catch {
+    return null;
   }
 }
