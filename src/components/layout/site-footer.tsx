@@ -11,17 +11,26 @@ export async function SiteFooter() {
   const ui = getFooterUi(lang);
 
   return (
-    <footer className="relative border-t border-line bg-panel/40">
-      <Container className="py-20 md:py-28">
+    <footer className="relative overflow-hidden border-t border-line bg-panel/40">
+      <div aria-hidden className="flex h-2">
+        <span className="flex-1 bg-mustard" />
+        <span className="flex-1 bg-rust" />
+        <span className="flex-1 bg-teal" />
+        <span className="flex-1 bg-cream" />
+      </div>
+      <Container size="wide" className="py-20 md:py-28">
         <Reveal>
           <p className="kicker mb-6">{ui.endSession}</p>
-          <p className="display max-w-3xl text-3xl md:text-5xl">
-            {ui.farewell}{" "}
-            <span className="text-muted">{ui.farewellMuted}</span>
+          <p className="bebop text-[clamp(3.6rem,12vw,11rem)] text-foreground">
+            See you,
+            <br />
+            <span className="text-mustard">space cowboy</span>
+            <span className="text-rust">…</span>
           </p>
+          <p className="typewriter mt-6 max-w-xl text-lg text-muted">{ui.farewellMuted}</p>
           <a
             href={`mailto:${site.email}`}
-            className="mt-8 inline-block border-b border-amber/50 pb-1 font-mono text-sm tracking-[0.18em] uppercase text-foreground transition-colors hover:border-amber hover:text-amber"
+            className="bebop mt-8 inline-flex items-center gap-3 bg-cream px-5 pt-3 pb-2 text-2xl text-ink shadow-[5px_5px_0_var(--rust)] transition-all hover:-translate-y-0.5 hover:shadow-[8px_8px_0_var(--rust)]"
           >
             {site.email}
           </a>

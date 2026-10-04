@@ -1,0 +1,29 @@
+---
+title: "One strip of screen"
+description: "Idle Pixel Hero's first three days: a widget that lets clicks through, a simulation with its own balance tools, and 42,327 repaired outlines."
+date: "2026-09-09"
+tags: ["idle pixel hero", "unity", "c#", "pixel art"]
+project: "idle-pixel-hero"
+session: 4
+cover: "/work/idle-pixel-hero/shot-2.webp"
+---
+
+The idea fits on a sticky note: an RPG that lives in a thin strip on your desktop and keeps fighting while you work. The strip lets clicks pass through to whatever is underneath, stays on top, hides when a fullscreen game or video opens, and uses almost no CPU. When you want to make decisions, the same window turns into the **Headquarters**.
+
+## Day one: three things in one commit
+
+The first commit is titled *the widget, the simulation and the balance tooling*, and that ordering matters. The simulation was written so it could be run and measured without the strip — `sim boss` traces a single fight end to end, and on day two it disproved a claim I had written down about boss pacing. The claim was corrected, not the trace.
+
+## Art that holds together
+
+The regions were generated — swamp, glacier, volcano, then sky, void and every cast — and generated art drifts. So there was a cleanup pass, and then an audit of the cleanup pass "instead of guessing at it". It ended at **zero off-palette colours and 42,327 outlines repaired**, with a palette rebuilt to cover the game the project had actually become.
+
+Some of the work was making things *visible*: a boss trophy drop worth looking at, a trophy burst long enough to be seen, a banner that had been hiding the trophy shower. Each of those was filmed, along with the boss enrage, using tooling built for the purpose.
+
+## Shipping blockers, early
+
+By the end of day two there was a list called *shipping blockers: a way out, a way in, and no white flash.* Then: nine languages, with a font that admits what it cannot draw. Sound for only the four things worth interrupting somebody for. Achievements — with Steam as something that is merely *told* about them — and one achievement taken back because it was awarded in error.
+
+Tests went into the four assemblies that had none, and into the two layers whose failures cannot be recovered from: saving and loading. The second prestige tier was built and shipped closed.
+
+On day three Steamworks.NET was installed and the Steam layer compiled for the first time.

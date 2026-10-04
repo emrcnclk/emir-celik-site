@@ -1,0 +1,35 @@
+---
+title: "Skor değil, kayıt tutan bir odak uygulaması"
+description: "Mythkeep ile sekiz gün: 610 testli bir domain katmanı, 8-bit'e dönüş ve sprite'ları çoğunlukla çizilmeyip türetilen 48 tür."
+date: "2026-09-02"
+tags: ["mythkeep", "react native", "pixel art", "test"]
+project: "mythkeep"
+session: 3
+cover: "/work/mythkeep/cover.webp"
+---
+
+Mythkeep, odak uygulaması kılığına girmiş bir yaratık büyütme oyunu. Seansı bitir, bir yaratık beslensin. Yarıda bırak, seans onun kaydına bir iz bıraksın. Büyüttüğün hiçbir şey ölmüyor, kazandığın hiçbir şey geri alınmıyor. Uygulama kayıt tutuyor; skor tutmuyor.
+
+## Sırayla aşamalar
+
+Proje numaralı aşamalarla yapıldı ve commit geçmişi bir içindekiler tablosu gibi okunuyor:
+
+- **Aşama 0** — iskelet, tasarım sistemi, dokümanlar.
+- **Aşama 1** — yaratık durum makinesi, veritabanı katmanı, tür tablosu.
+- **Aşama 2** — çalışan bir zamanlayıcı, molalar ve uygulama kapanınca seansı kurtarma.
+- **Aşama 3** — odak bütünlüğü: ihlal izleri, ne kadar katı olunacağı ayarı ve ekran kilidi algılama (telefonu kilitlemek çıkmak sayılmaz).
+- **Aşama 4** — ritüel yükü bir yumurtaya dönüşüyor.
+
+Domain katmanı hiçbir şey import etmiyor — React yok, React Native yok, veritabanı yok — bu yüzden **610 testi düz Node'da %98 kapsamla koşuyor.** Emülatör yine de testlerin bulamadığı hataları iki kez buldu; iki tur da kayıtta.
+
+## Karar 21: bütün kabuk 8-bit
+
+Yarı yolda görsel yön değişti: bütün kabuk 8-bit oldu. Bu karar bir pixel üreticiye ve bir atlas hattına mal oldu — sonra kendini ödedi. 48 türün hepsi çizildi, ardından yavrular, gençler ve kalan evreler: **kırk sekizinin hepsi için dört yaşam evresi.** Bu karelerin çoğu *türetildi*. Nefes alma hesaplanıyor, çizilmiyor. Cerberus'un üç kafası var ve türetmenin bunu öğrenmesi gerekti.
+
+## Bir şey hissettirmek
+
+Son günler dokuyla ilgiliydi: seçtiğin bir yoldaş, havada süzülmek yerine oturan bir anıt, yoldaşın elinde on iki işaret, her tür için iki cümle ve beş isim. Zaman akmaya başladı ve her bedelin bir geri dönüş yolu oldu. Bir yılın günleri altıgen bir haritaya dönüştü; hem kayıt hem de yükselen bir yaratığın kitabesi telefondan bir görsel olarak çıkabiliyor.
+
+## Mağazanın istediği temizlik
+
+Monetizasyon girmeden önce bir bulgu öne çıktı: *bir odak uygulaması mikrofon izni istiyordu.* Durdu. İzinler on dörtten yediye indi. Sonra Karar 22 — reklamlar ve bir Reklamları Kaldır satın alımı — bir stüdyo adı altında, üç sürüm profiliyle.

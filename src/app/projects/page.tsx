@@ -1,9 +1,8 @@
 import { Container } from "@/components/ui/container";
 import { PageHeader } from "@/components/ui/page-header";
-import { ProjectRow } from "@/components/cards/project-row";
-import { SceneBackdrop } from "@/components/atmosphere/scene-backdrop";
 import { NoirLink } from "@/components/ui/noir-link";
-import { atmosphere } from "@/data/atmosphere";
+import { TitleCard } from "@/components/bebop/title-card";
+import { BountyCard } from "@/components/cards/bounty-card";
 import { site } from "@/config/site";
 import { getLiveProjects } from "@/lib/github";
 import { getPageUi } from "@/lib/i18n-pages";
@@ -13,7 +12,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Projects",
   description:
-    "Live hangar from GitHub — latest public repos, curated when the signal is strong.",
+    "The bounty board — Blood Moon, Idle Pixel Hero, GMRLOG, Mythkeep, BlockSlide and more, each with a case file.",
   path: "/projects",
 });
 
@@ -25,31 +24,41 @@ export default async function ProjectsPage({
   const lang = await resolvePageLang(searchParams);
   const ui = getPageUi("projects", lang);
   const projects = await getLiveProjects();
+  const wanted = projects.filter((p) => p.featured);
+  const others = projects.filter((p) => !p.featured);
 
   return (
-    <div className="relative overflow-hidden">
-      <SceneBackdrop
-        src={atmosphere.github}
-        opacity={22}
-        fit="cover"
-        position="center center"
-      />
-      <div className="relative z-10">
-        <PageHeader kicker={ui.kicker} title={ui.title} lede={ui.lede}>
-          <div className="mt-8">
-            <NoirLink href={site.socials.github} external>
-              github.com/{site.githubUser}
-            </NoirLink>
-          </div>
-        </PageHeader>
-        <Container className="pb-32">
-          <ul className="border-b border-line">
-            {projects.map((project, i) => (
-              <ProjectRow key={project.slug} project={project} index={i} lang={lang} />
+    <>
+      <PageHeader kicker={ui.kicker} title={ui.title} lede={ui.lede}>
+        <div className="mt-8">
+          <NoirLink href={site.socials.github} external>
+            github.com/{site.githubUser}
+          </NoirLink>
+        </div>
+      </PageHeader>
+
+      <Container size="wide" className="pb-24">
+        <ul className="grid gap-8 md:grid-cols-2 lg:gap-10">
+          {wanted.map((project, i) => (
+            <li key={project.slug} className={i === 0 ? "md:col-span-2" : undefined}>
+              <BountyCard project={project} index={i} lang={lang} size={i === 0 ? "lg" : "md"} />
+            </li>
+          ))}
+        </ul>
+      </Container>
+
+      {others.length > 0 && (
+        <Container size="wide" className="pb-32">
+          <TitleCard kicker={ui.othersKicker} title={ui.others} />
+          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {others.map((project, i) => (
+              <li key={project.slug}>
+                <BountyCard project={project} index={wanted.length + i} lang={lang} />
+              </li>
             ))}
           </ul>
         </Container>
-      </div>
-    </div>
+      )}
+    </>
   );
 }

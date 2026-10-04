@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/container";
 import { Kicker } from "@/components/ui/kicker";
 import { Reveal } from "@/components/motion/reveal";
 import { TextReveal } from "@/components/motion/text-reveal";
+import { ColorBars } from "@/components/bebop/color-bars";
 import { cn } from "@/lib/utils";
 
 type PageHeaderProps = {
@@ -15,22 +16,24 @@ type PageHeaderProps = {
 };
 
 /**
- * The opening frame of every inner page: eyebrow, display title,
- * one-paragraph lede. Consistent enough to feel like chapters
- * of the same film.
+ * The opening frame of every inner page — a Bebop title card:
+ * colour bars, eyebrow, the title in condensed caps, one-paragraph lede.
  */
 export function PageHeader({ kicker, title, lede, children, className }: PageHeaderProps) {
   return (
-    <header className={cn("pt-40 pb-20 md:pt-52 md:pb-28", className)}>
-      <Container>
-        <Reveal distance={12}>
-          <Kicker signal>{kicker}</Kicker>
-        </Reveal>
+    <header className={cn("pt-36 pb-16 md:pt-48 md:pb-24", className)}>
+      <Container size="wide">
+        <div className="flex items-center gap-4">
+          <ColorBars />
+          <Reveal distance={12}>
+            <Kicker signal>{kicker}</Kicker>
+          </Reveal>
+        </div>
         <TextReveal
           as="h1"
           text={title}
           delay={0.15}
-          className="display mt-6 text-5xl md:text-7xl lg:text-8xl"
+          className="bebop mt-6 max-w-5xl text-[clamp(3.8rem,11vw,9.5rem)]"
         />
         {lede && (
           <Reveal delay={0.5} className="mt-8 max-w-xl">

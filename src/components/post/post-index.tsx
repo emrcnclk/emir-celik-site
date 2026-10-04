@@ -20,8 +20,9 @@ export function PostIndex({
   title,
   lede,
   empty,
+  lang = "en",
 }: PostIndexProps) {
-  const posts = getPosts(collection);
+  const posts = getPosts(collection, lang);
 
   return (
     <>

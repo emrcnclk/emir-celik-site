@@ -43,8 +43,13 @@ function statusFor(repo: GithubRepo): Project["status"] {
 }
 
 function curatedMatch(slug: string) {
-  return curatedProjects.find((p) => p.slug === slug || p.link?.includes(`/${slug}`));
+  return curatedProjects.find(
+    (p) => p.slug === slug || p.link?.toLowerCase().endsWith(`/${slug}`),
+  );
 }
+
+/** Repos that are not portfolio work (this site, its predecessor). */
+const HIDDEN_REPOS = new Set(["emir-celik-site", "personal-site", "lumenbragamejam"]);
 
 export function repoToProject(repo: GithubRepo): Project {
   const slug = repo.name.toLowerCase();
@@ -96,21 +101,36 @@ export async function fetchGithubRepos(): Promise<GithubRepo[]> {
   return data.filter((r) => !r.fork);
 }
 
-/** Live projects sorted by last push — curated copy when API fails. */
+/**
+ * The curated board first, in its own order, refreshed with live stars;
+ * then any other public repo the board does not know about yet.
+ * Falls back to the curated copy when the API is unreachable.
+ */
 export async function getLiveProjects(): Promise<Project[]> {
+  let repos: GithubRepo[] = [];
   try {
-    const repos = await fetchGithubRepos();
-    if (repos.length === 0) return curatedProjects;
-    return repos
-      .map(repoToProject)
-      .sort((a, b) => b.year - a.year || a.title.localeCompare(b.title));
+    repos = await fetchGithubRepos();
   } catch {
     return curatedProjects;
   }
+
+  const live = new Map(repos.map((r) => [r.name.toLowerCase(), r]));
+  const curated = curatedProjects.map((p) => {
+    const repoName = p.link?.split("/").pop()?.toLowerCase();
+    const repo = repoName ? live.get(repoName) : undefined;
+    return repo ? { ...p, stars: repo.stargazers_count } : p;
+  });
+
+  const extras = repos
+    .filter((r) => !HIDDEN_REPOS.has(r.name.toLowerCase()))
+    .filter((r) => !curatedMatch(r.name.toLowerCase()))
+    .map(repoToProject)
+    .map((p) => ({ ...p, featured: false }));
+
+  return [...curated, ...extras];
 }
 
 export async function getFeaturedProjects(): Promise<Project[]> {
   const all = await getLiveProjects();
-  const featured = all.filter((p) => p.featured);
-  return featured.length > 0 ? featured : all.slice(0, 4);
+  return all.filter((p) => p.featured);
 }

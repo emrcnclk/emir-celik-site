@@ -1,0 +1,33 @@
+---
+title: "Teaching a Mac to keep a widget"
+description: "Five rounds of feedback from a Mac tester, a strip that settles among desktop widgets, and content packs read from Steam."
+date: "2026-09-15"
+tags: ["idle pixel hero", "macos", "unity", "steam"]
+project: "idle-pixel-hero"
+session: 5
+cover: "/work/idle-pixel-hero/shot-3.webp"
+---
+
+On Windows, a click-through, always-on-top strip is a known recipe. On a Mac it is a negotiation. The goal for this stretch was to give the widget a Mac side **without writing a native plugin** — and to do it for a tester who had never opened the project.
+
+## A guide for someone who has never seen it
+
+Before any Mac fix, there was a build-and-test guide written for exactly that person. Each round afterwards, the guide was updated to ask about the *new* window, not just the old bugs — "point the Mac guide at a retest rather than a first run". The README arrived the same day, in Turkish and English.
+
+## Five rounds
+
+The commits from 12 to 14 September are a conversation:
+
+- Make the Mac keys follow the keyboard layout. Stop the Headquarters opening empty, and fetch it across Spaces.
+- Let the strip settle among desktop widgets and on the Dock. Put it on a frosted, rounded plate.
+- Let the Mac widget take the shape of the desktop widgets around it — then scale the whole fight to fit whatever shape that is, with the HUD kept at strip size inside a zoomed widget.
+- *Act on the fifth round of feedback:* plate-only backdrop, shorter strip, small widgets under windows.
+- Bring the medium widget back, make the small one easy to hold, and turn the boar around.
+
+That last one is real: a sprite was facing the wrong way, and it took a tester to notice.
+
+## Meanwhile, content
+
+The same days added four content packs — a race, two classes and five weapons each — with ownership read from Steam and the Steam inventory mirrored into the bag. PixelLab generated the pack heroes, their weapon icons and a portrait for every hero. The party tab became a character sheet with drag-to-reorder formation, and clicking a hero on the strip opens a window about them right there.
+
+Windows got its own fix in return: the strip now stays up behind maximised windows and other screens' fullscreen apps.

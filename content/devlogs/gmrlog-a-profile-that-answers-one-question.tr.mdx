@@ -1,0 +1,30 @@
+---
+title: "Tek bir soruya cevap veren profil"
+description: "GMRLOG'un tasarım sistemiyle iki hafta, hesabını gösteren bir zevk eşleştirme motoru ve Google, Discord, Steam ile giriş."
+date: "2026-08-14"
+tags: ["gmrlog", "tasarım sistemi", "typescript", "oauth"]
+project: "gmrlog-app"
+session: 1
+---
+
+GMRLOG'un kilitli bir Kuzey Yıldızı var: bir profil açıldığı anda *bu nasıl bir oyuncu?* sorusuna cevap vermeli. Ağustosun ilk iki haftasında yapılan her şey bu cümleyle ölçüldü.
+
+## Önce palet
+
+Sprint koyu ve açık paletlerin yeniden değerlenmesiyle ve uygulamaya tek bir plazma vurgu rengi verilmesiyle açıldı. Ardından küçük görünen ama küçük olmayan bir kural: **nadirlik yalnızca renkle değil, geometriyle kodlanır.** Efsanevi bir rozetin şekli sıradan olandan farklı; bilgi renk körlüğünden, kötü ekranlardan ve ekran görüntülerinden sağ çıkıyor.
+
+Aynı tur dürüst hatalar da çıkardı. "Animasyonlu" olan ama interpolasyonu hiç ilerlemeyen bir toggle. Token'ını okumak yerine siyahı sabit kodlayan bir scrim. Derinliği yüzeyden kurmak yerine gölgeyle taklit eden bir kapak. Her düzeltme, onu bulan denetimle birlikte girdi.
+
+## Ekranlar baştan
+
+Sonrası ekran ekran ilerledi — Başarımlar, Ayarlar, Bildirimler, Mesajlar, Keşfet, Profil, Kayıt, Karşılama, Topluluklar — her biri yerel kopyalar yerine ortak parçalarla yeniden kuruldu. Profil bir *oyuncu kayıt kartı* etrafında toplandı; Kayıt ve Karşılama tek bir ortak giriş kabuğuna taşındı. Tier listeleri sürükle-bırak sıralama kazandı. İnceleme yazma ekranı bir formdan çok bir yazı yüzeyine dönüştü.
+
+## Hesabını gösteren eşleşme
+
+En sevdiğim özellik DNA match. İki oyuncu bir benzerlik skoru alıyor — ama motor **yalnızca skor değil, bir kırılım döndürecek** şekilde değiştirildi ve bileşenler saklanıyor. Açık profilde panel *neden* eşleştiğinizi gösteriyor ve yalnızca bireysel hesaplara açık. Gerekçesi olmayan bir sayı burç yorumudur.
+
+## Giriş
+
+Önce hesap eşleştirme, sonra Google, sonra Discord, sonra Steam. Steam'de bir tuzak vardı: beyana dayalı bir Steam ID ile başkasının hesabı ele geçirilebiliyordu. O yol kapatıldı, sonra geliştirme ortamı dışında tamamen reddedildi. Ayarlar bağlama ve bağlantı kesme kazandı; son giriş yöntemini kaldırmana izin vermeyen bir korumayla.
+
+Seans DNA paneli ve ilerleme çubukları için bir erişilebilirlik turu ve tam bir kontrolle kapandı: **33 turbo görevinin 33'ü yeşil.**

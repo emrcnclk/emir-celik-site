@@ -1,0 +1,34 @@
+---
+title: "Kimsenin tasarlamadığı yüz seviye"
+description: "BlockSlide'ın seviye remix üreticisi: aynalama ve renk permütasyonu bir bulmacayı neden tam olarak aynı derecede çözülebilir tutar — ve etrafındaki mağaza düzeltmeleri."
+date: "2026-09-27"
+tags: ["blockslide", "unity", "editör araçları", "seviye tasarımı"]
+project: "blockslide"
+session: 7
+cover: "/work/blockslide/cover.webp"
+---
+
+BlockSlide, *bitirmeyi* çalıştığım proje. Unity 6'da, önce iOS için bir blok kaydırma bulmacası; Haziran'dan beri repo bir mağaza build'inin ihtiyaç duyduğu her şeyi taşıyor: AdMob, uygulama içi satın alımlar, Firebase, barındırılan gizlilik ve kullanım şartları sayfaları ve iOS binary'sini derleyen takım arkadaşı için bir Mac rehberi.
+
+Eksik olan, yeterince seviyeydi.
+
+## Hile
+
+101–200 arası seviyeleri elle tasarlamak haftalar alırdı. Sıfırdan üretmek bir çözücü demekti; çözücü de her çıktının çözülebilir olduğunu kanıtlamak demek. Daha ucuz bir yol var: **çözülebilir olduğu zaten bilinen seviyeleri, onları bozamayacak şekillerde dönüştürmek.**
+
+İki dönüşüm buna uyuyor:
+
+- **Aynalama** — yatay, dikey ya da ikisi birden. Tahtanın kuralları sağı solu umursamıyor; aynalanmış bir çözüm aynalanmış seviyeyi hamle hamle çözüyor.
+- **Renk permütasyonu** — hangi rengin hangisi olduğunu değiştirmek. Renkler yalnızca birbirlerine göre önemli; tutarlı bir değişim görünüşü değiştiriyor, başka hiçbir şeyi değil.
+
+İkisini birleştirince 21–100 arasından bir seviye, kaynağıyla *tam olarak* aynı derecede çözülebilir yeni bir seviyeye dönüşüyor.
+
+## Araç
+
+`Tools/BlockGame` altında bir editör penceresi. Bir kaynak aralığı (varsayılan 21–100 — ilk yirmisi eğitim), kaç tane üretileceğini, bir seed'i ve renklerin karıştırılıp karıştırılmayacağını seçiyorsun. Özel notu olan seviyeler — eğitim seviyeleri — ve rastgeleleştiricide kullanılmaması işaretlenen seviyeler asla kaynak olmuyor. Yeni asset'ler Level Database'e mevcut son seviyenin ardından ekleniyor; oyun başka hiçbir değişiklik olmadan onları alıyor.
+
+Bir bloğu aynalamak yalnızca hücrelerini çevirmek değil: her figürün hücreleri ve pivotu önce normalize edilip önbelleğe alınıyor, böylece aynalanmış bir parça bozuk bir parça olarak değil aynı türden bir parça olarak iniyor. Seed sonucu tekrarlanabilir kılıyor — 2026 ile tekrar çalıştırırsan aynı yüz seviyeyi alırsın.
+
+## Commit'in geri kalanı
+
+Aynı değişiklik mağaza parçalarını da düzeltti: AdMob ayarları ve Xcode projesini yamalayan post-build adımı, monetizasyon ayarları, hosting klasörü için bir `app-ads.txt` ve yeni bir uygulama ikonu. Küçük, gösterişsiz, zorunlu.

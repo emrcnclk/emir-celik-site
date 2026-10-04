@@ -1,0 +1,34 @@
+---
+title: "A hundred levels nobody had to design"
+description: "BlockSlide's level remix generator: why mirroring and colour permutation keep a puzzle exactly as solvable — plus the store fixes around it."
+date: "2026-09-27"
+tags: ["blockslide", "unity", "editor tools", "level design"]
+project: "blockslide"
+session: 7
+cover: "/work/blockslide/cover.webp"
+---
+
+BlockSlide is the project I use to practise *finishing*. It is a sliding-block puzzle in Unity 6, iOS first, and since June the repository has carried everything a store build needs: AdMob, in-app purchases, Firebase, hosted privacy and terms pages, and a Mac guide for the teammate who builds the iOS binary.
+
+What it did not have was enough levels.
+
+## The trick
+
+Hand-designing levels 101 to 200 would have taken weeks. Generating them from scratch would have meant a solver, and a solver means proving every output solvable. There is a cheaper road: **transform levels that are already known to be solvable, in ways that cannot break them.**
+
+Two transforms qualify:
+
+- **Mirroring** — horizontally, vertically, or both. The board's rules do not care about left and right, so a mirrored solution solves the mirrored level, move for move.
+- **Colour permutation** — swapping which colour is which. Colours only matter in relation to each other, so a consistent swap changes the look and nothing else.
+
+Compose them and a level from 21–100 becomes a new level that is *exactly* as solvable as its source.
+
+## The tool
+
+It is an editor window under `Tools/BlockGame`. You pick a source range (21 to 100 by default — the first twenty are the tutorial), how many to make, a seed and whether to shuffle colours. Levels with a special note — the tutorial ones — and any level marked not to be used in the randomizer are never sources. The new assets are appended to the Level Database after the last existing level, so the game picks them up with no other change.
+
+Mirroring a block is not just flipping its cells: each figure's cells and pivot are normalised and cached first, so a mirrored piece lands as the same kind of piece, not a broken one. The seed makes it reproducible — run it again with 2026 and you get the same hundred levels.
+
+## The rest of the commit
+
+The same change fixed the store pieces: the AdMob settings and the post-build step that patches the Xcode project, the monetization settings, an `app-ads.txt` for the hosting folder, and a new app icon. Small, unglamorous, required.

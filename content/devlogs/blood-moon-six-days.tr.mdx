@@ -1,0 +1,34 @@
+---
+title: "Dört kişilik bir geceye altı gün"
+description: "Blood Moon: simülasyonu Unity'ye hiç dokunmayan bir co-op survivors oyunu, ikili bir snapshot protokolü, birleşen bölünmüş ekran ve bir PixelLab görsel hattı."
+date: "2026-10-03"
+tags: ["blood moon", "unity", "ağ kodu", "co-op", "pixel art"]
+project: "blood-moon"
+session: 9
+cover: "/work/blood-moon/cover.webp"
+---
+
+Blood Moon — repoda *Kan Ayı* — bir ila dört oyuncu için bir survivors oyunu. Online oyun Steam lobileri ve davetlerle çalışıyor; aynı ekranda dört kişiye kadar oynanabiliyor; ikisi karışık da kullanılabiliyor. Seviye atlamak oyunu durdurmuyor: gece gelmeye devam ederken her oyuncu kendi kartını seçiyor.
+
+## Birinci gün: mimari oyunun kendisi
+
+İlk commit oyunu *ve* görsel hattını ekledi; yapı o günden beri yerinden oynamadı:
+
+- `Core/` — saf C# simülasyon, içerik verisi ve meta ilerleme. Unity yok.
+- `Net/` — ikili bir protokol, bir snapshot kodlayıcı, host ve istemci oturumları.
+- `Game/` — Unity katmanı: açılış, girdi, bölünmüş ekran, çizim, VFX, ses, arayüz, Steam ve LAN.
+- `tools/CoreSim` — simülasyon, ağ ve meta testleri, artı denge botları; hepsi Unity açılmadan.
+
+Simülasyon düz C# olduğu için aynı tick tek kişilik bir koşuda, bir LAN host'unda ve bir Steam lobisinde çalışıyor; bir bot bin koşu oynayıp bir silahın fazla güçlü olduğunu söyleyebiliyor.
+
+## İkinci–dördüncü gün: oyun yapmak
+
+Oyuncular bir aradayken bölünmüş ekran tek görüntüye birleşiyor. Her türden kontrolcü çalışıyor; kontrolcüye göre tuş ipuçları ve titreşimle. Oyuncu atışları duvarlarda kırılıyor, nişanlı saldırılar görebildiklerini tercih ediyor; duvara yapışınca haritaya özgü biraz hasar alıyorsun. Her final bossu kendi görselini aldı. Dekorlar, sandıklar, gezgin bir tüccar ve Kan Sunakları — alanı temizle, sayacı izle, ekran dışı oku takip et. Her biri PixelLab ikonlu **53 Steam başarımı**.
+
+Görsel hattı bir manifest: `pixellab.json` neyin üretileceğini listeliyor, çıktı `Resources/Art`'a düşüyor. Üretilen görsel bir taslaktır. Ters yöne bakan yürüme döngüleri, kanatları kesik bir yarasa, ayakları yerine alt boşluklarının üstünde duran sprite'lar ve üreticinin altlarına sürekli çizdiği zemin bloğu olmadan yeniden çizilen dekorlar için commit'ler var.
+
+## Beşinci ve altıncı gün: derinlik
+
+Sınırsız şans — daha nadir seviye kartları, şans yetenekleri, şans eşyaları. Sonsuz koşular, lanetler, günlük ve haftalık meydan okumalar, on bir dil. Kapsüller, ekran görüntüleri ve kliplerle bir mağaza sayfası. Sonra lobi şifreleri ve oyuncu sınırı, ortak kese ve sandıklarla co-op sinerjileri, iki yeni karakter — Kumarbaz ve Vampir — ve dükkândan ikiden beşe kadar satın alınan silah ve pasif yuvaları.
+
+Son commit ilk dört buçuk dakikayı sakinleştirdi ve haritaları zincirledi: Mezarlık'ı kazan, Buz Ormanı açılsın; sonra Kemik Mahzeni, sonra Cehennem Kapısı.

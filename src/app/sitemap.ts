@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { allNavItems } from "@/config/navigation";
 import { site } from "@/config/site";
 import { getPosts } from "@/lib/content";
+import { caseFileProjects } from "@/data/projects";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = allNavItems
@@ -21,5 +22,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   );
 
-  return [...staticPages, ...posts];
+  const caseFiles = caseFileProjects.map((p) => ({
+    url: `${site.url}/projects/${p.slug}`,
+    lastModified: p.stats ? new Date(p.stats.to) : undefined,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...caseFiles, ...posts];
 }

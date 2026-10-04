@@ -115,16 +115,52 @@ export function getCinemaUi(lang: Lang) {
 
 export const heroUi = {
   en: {
-    session: "Session 01",
+    session: "Session #01",
+    episode: "Game Theory Blues",
     live: "live · no overdubs",
-    headline: ["Game theory.", "Mind like a machine.", "Play with the system."],
-    drop: "Drop the needle",
+    headline: ["Emir", "Çelik"],
+    tagline:
+      "Game developer & computer engineer. I build games that live in your desktop's margins, co-op nights under a red moon, and the systems underneath them.",
+    theme: "Theme — Tank! · The Seatbelts",
+    feed: "Live feed",
+    bounties: "Bounty board",
+    sessions: "Read the sessions",
+    marquee: [
+      "3, 2, 1 — Let’s jam",
+      "Unity 6",
+      "C#",
+      "React Native",
+      "TypeScript",
+      "Steamworks",
+      "Game theory",
+      "AI systems",
+      "Pixel art pipelines",
+      "Co-op netcode",
+    ],
   },
   tr: {
-    session: "Seans 01",
+    session: "Seans #01",
+    episode: "Oyun Teorisi Blues",
     live: "canlı · overdub yok",
-    headline: ["Oyun teorisi.", "Makine gibi zihin.", "Sistemle oyna."],
-    drop: "İğneyi bırak",
+    headline: ["Emir", "Çelik"],
+    tagline:
+      "Oyun geliştirici ve bilgisayar mühendisi. Masaüstünün kenarında yaşayan oyunlar, kızıl bir ayın altında co-op geceler ve onların altındaki sistemleri yapıyorum.",
+    theme: "Tema — Tank! · The Seatbelts",
+    feed: "Canlı yayın",
+    bounties: "Ödül panosu",
+    sessions: "Seansları oku",
+    marquee: [
+      "3, 2, 1 — Let’s jam",
+      "Unity 6",
+      "C#",
+      "React Native",
+      "TypeScript",
+      "Steamworks",
+      "Oyun teorisi",
+      "Yapay zekâ sistemleri",
+      "Pixel art hatları",
+      "Co-op ağ kodu",
+    ],
   },
 } as const;
 
@@ -204,14 +240,14 @@ export const nowUi = {
     {
       label: "Building",
       detail:
-        "BlockSlide — Unity 6 mobile puzzle, iOS-first. Also extending Kiel with an AI layer.",
-      href: "/projects",
+        "Blood Moon — a four-player co-op survivors game, six days old and already on a Steam page. Idle Pixel Hero is heading to Steam and the stores.",
+      href: "/projects/blood-moon",
     },
     {
-      label: "Learning",
+      label: "Shipping",
       detail:
-        "Game-theoretic framing for multi-agent systems, and how those ideas transfer into practical AI tooling.",
-      href: "/ai",
+        "BlockSlide's store build with a hundred remixed levels, and Mythkeep's first release profiles.",
+      href: "/devlogs",
     },
     {
       label: "Listening",
@@ -234,14 +270,14 @@ export const nowUi = {
     {
       label: "İnşa",
       detail:
-        "BlockSlide — Unity 6 mobil bulmaca, iOS öncelikli. Ayrıca Kiel’e yapay zekâ katmanı ekliyorum.",
-      href: "/projects",
+        "Blood Moon — dört kişilik co-op bir survivors oyunu; altı günlük ve şimdiden bir Steam sayfası var. Idle Pixel Hero Steam'e ve mağazalara hazırlanıyor.",
+      href: "/projects/blood-moon",
     },
     {
-      label: "Öğrenme",
+      label: "Yayın",
       detail:
-        "Çok ajanlı sistemler için oyun-teorik çerçeve ve bu fikirlerin pratik yapay zekâ araçlarına aktarımı.",
-      href: "/ai",
+        "Yüz remix seviyeyle BlockSlide'ın mağaza build'i ve Mythkeep'in ilk sürüm profilleri.",
+      href: "/devlogs",
     },
     {
       label: "Dinleme",

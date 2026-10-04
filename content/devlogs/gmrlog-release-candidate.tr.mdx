@@ -1,0 +1,37 @@
+---
+title: "Sürüm adayı ve bir güvenlik turunun buldukları"
+description: "GMRLOG v1.0.0-rc1: sunucuda türetilen sayılar, atomik refresh token'lar, her yüzeyde profil görünürlüğü ve bir yasal onay kapısı."
+date: "2026-08-24"
+tags: ["gmrlog", "güvenlik", "backend", "sürüm"]
+project: "gmrlog-app"
+session: 2
+---
+
+Bir sürüm adayı, sıkıcı kısımların bittiğine dair bir sözdür. Ağustosun ikinci yarısı sıkıcı kısımlardı ve gerçek hatalar oradaydı.
+
+## İstemcinin hesaplamaması gereken sayılar
+
+Bazı rakamlar uygulamada hesaplanıyordu: bir başarıma kaç oyuncunun sahip olduğu, bir kullanıcının favori tür sayıları. İkisi de sunucuya taşındı — *veriyi nerede tutuyorsan orada türet* — böylece her istemci aynı şeyi gösteriyor. Aynı hafta veritabanı ile tipler arasındaki şema kayması da giderildi.
+
+## Güvenlik turu
+
+Önce rate limit ve bir IDOR denetimi. Sonra bir denetimi zaten değerli kılan bulgular:
+
+- **Refresh token'lar atomik tüketiliyor.** Aynı token'la yarışan iki istek artık ikisi birden kazanamıyor.
+- **Profil görünürlüğü her açık yüzeyde uygulanıyor**, yalnızca profil sayfasında değil — gizli bir profil aramada, listelerde ve eşleşmelerde de gizli kalıyor.
+- **Beyana dayalı Steam bağlantıları geliştirme dışında reddediliyor.**
+- Repo, production veri depolarını ve örnek gizli anahtarları açığa çıkarmayı bıraktı.
+
+`v1.0.0-rc1` sürüm notları 18 Ağustos'ta yazıldı.
+
+## Onay, düzgünce
+
+Kullanım Şartları ve Gizlilik uygulama içi bir okuyucu, kayıtta açık bir onay kutusu, bildirim ile sözleşme ayrımı ve belgeler değiştiğinde *yeniden onay gerekir* durumuna uyan, uygulamaya bağlanmış bir onay kapısı kazandı. Yasal ve veri hakları aşamasındaki QA turu sekiz sorun buldu; sekizi de düzeltildi.
+
+## Küçük dürüst olanlar
+
+Ayın en sevdiğim düzeltmesi: kayıt ekranı "Üç adım" diyordu, altındaki gösterge "Adım 1 / 4" yazıyordu. Bir diğeri: Türkiye, ASCII klavyeden ülke seçicide bulunamıyordu. Bir de geliştirme veritabanını silecek bir geri yükleme deneme betiği. Hiçbiri parlak değil. Hepsi bir kullanıcının ilk çarpacağı şeyler.
+
+## Not, Eylül
+
+Eylül ortasında katalog oyun görsellerini indirmeyi bırakıp sağlayıcı URL'siyle referans vermeye başladı. Her katalog oyununa bir banner işi eklendi, bozuk medya onarıldı ve runbook artık medyanın nerede durduğunu ve bir bucket'ın neden açık olduğunu kaydediyor — depolamadan değil, bir Git Bash yol dönüşümünden kaynaklandığı anlaşılan bir veri kaybı korkusunun ardından.

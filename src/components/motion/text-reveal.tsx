@@ -35,7 +35,7 @@ export function TextReveal({ text, className, as = "h2", delay = 0 }: TextReveal
       aria-label={text}
     >
       {words.map((word, i) => (
-        <span key={i} className="inline-block overflow-hidden pb-[0.08em] -mb-[0.08em] align-top">
+        <span key={i} className="inline-block overflow-hidden pt-[0.1em] -mt-[0.1em] pb-[0.08em] -mb-[0.08em] align-top">
           <motion.span variants={wordReveal} className="inline-block will-change-transform">
             {word}
             {i < words.length - 1 ? "\u00A0" : ""}

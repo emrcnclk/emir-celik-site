@@ -3,7 +3,7 @@
  * href turns a row into a door to another room.
  */
 
-export const nowUpdated = "2026-07-16";
+export const nowUpdated = "2026-10-04";
 
 export type NowItem = {
   label: string;
