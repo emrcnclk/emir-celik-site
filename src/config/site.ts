@@ -6,7 +6,7 @@ export const site = {
   name: "Emir",
   fullName: "Emir Çelik",
   monogram: "E—Ç",
-  url: "https://emir.dev", // TODO: replace with your real domain
+  url: "https://emirinspace.com",
   title: "Emir Çelik — Game theory × AI × interactive systems",
   description:
     "Computer engineer and game developer exploring innovative solutions at the intersection of game theory and artificial intelligence.",
