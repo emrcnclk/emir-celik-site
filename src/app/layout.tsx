@@ -5,6 +5,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "@fontsource-variable/fraunces";
+import "@fontsource/bebas-neue";
+import "@fontsource/special-elite";
 import "./globals.css";
 
 import { site } from "@/config/site";
@@ -13,6 +15,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { FilmGrain } from "@/components/atmosphere/film-grain";
 import { Stardust } from "@/components/atmosphere/stardust";
 import { CustomCursor } from "@/components/atmosphere/custom-cursor";
+import { OpeningGate, OpeningTitles } from "@/components/bebop/opening-titles";
 import { personJsonLd } from "@/lib/seo";
 import { getServerLang } from "@/lib/i18n-server";
 
@@ -51,7 +54,14 @@ export default async function RootLayout({
   const lang = await getServerLang();
 
   return (
-    <html lang={lang} className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html
+      lang={lang}
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <OpeningGate />
+      </head>
       <body className="min-h-dvh antialiased">
         <script
           type="application/ld+json"
@@ -63,6 +73,7 @@ export default async function RootLayout({
         </Suspense>
         <main className="relative z-10">{children}</main>
         <SiteFooter />
+        <OpeningTitles />
         <FilmGrain />
         <CustomCursor />
         <Analytics />

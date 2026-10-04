@@ -1,0 +1,37 @@
+---
+title: "Release candidate, and what a security pass finds"
+description: "GMRLOG v1.0.0-rc1: server-derived numbers, atomic refresh tokens, profile visibility on every surface, and a legal-consent gate."
+date: "2026-08-24"
+tags: ["gmrlog", "security", "backend", "release"]
+project: "gmrlog-app"
+session: 2
+---
+
+A release candidate is a promise that the boring parts are done. The second half of August was the boring parts, and they were where the real bugs lived.
+
+## Numbers the client should not compute
+
+Several figures were being worked out in the app: how many players hold an achievement, a user's favourite genre counts. Both moved to the server — *derive it where the data is* — so every client shows the same thing. Schema drift between the database and the types was reconciled the same week.
+
+## The security pass
+
+Rate limits and an IDOR audit came first. Then the findings that justify doing an audit at all:
+
+- **Refresh tokens are consumed atomically.** Two requests racing with the same token can no longer both win.
+- **Profile visibility is enforced on every public surface**, not just the profile page — a private profile stays private in search, lists and matches.
+- **Self-reported Steam connections are refused outside development.**
+- The repository stopped exposing production datastores and example secrets.
+
+`v1.0.0-rc1` release notes were written on 18 August.
+
+## Consent, done properly
+
+Terms and Privacy got an in-app reader, an explicit tick at sign-up, a split between notice and contract, and a consent gate wired through the app that honours *requires re-consent* when the documents change. A QA round on the legal and data-rights phase found eight issues; all eight were fixed.
+
+## The small honest ones
+
+My favourite fix of the month: sign-up said "Three steps" above an indicator that read "Step 1 of 4". Another: Türkiye was not findable in the country picker from an ASCII keyboard. And a restore dry-run script that would have dropped the development database. None of these are glamorous. All of them are what a user would have hit first.
+
+## Postscript, September
+
+In mid-September the catalog stopped downloading game images and started referencing them by provider URL. Every catalog game got a banner job, broken media was repaired, and the runbook now records where media lives and why a bucket is public — after a data-loss scare that turned out to be a Git Bash path rewrite, not the storage.

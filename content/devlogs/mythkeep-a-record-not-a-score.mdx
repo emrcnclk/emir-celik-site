@@ -1,0 +1,35 @@
+---
+title: "A focus app that keeps a record, not a score"
+description: "Eight days of Mythkeep: a domain layer with 610 tests, a pivot to 8-bit, and 48 species whose sprites are mostly derived, not drawn."
+date: "2026-09-02"
+tags: ["mythkeep", "react native", "pixel art", "testing"]
+project: "mythkeep"
+session: 3
+cover: "/work/mythkeep/cover.webp"
+---
+
+Mythkeep is a creature-raising game wearing a focus app's clothes. Finish a session and a creature eats. Leave halfway and the session leaves a mark on its record. Nothing you raise ever dies, nothing you earn is taken back. The app keeps a record; it does not keep score.
+
+## Phases, in order
+
+The project was built in numbered phases, and the commit log reads like a table of contents:
+
+- **Phase 0** — skeleton, design system, docs.
+- **Phase 1** — the creature state machine, the database layer, the species table.
+- **Phase 2** — a working timer, breaks, and recovering a session after the app dies.
+- **Phase 3** — focus integrity: breach marks, a setting for how strict to be, and screen-lock detection (locking the phone is not leaving).
+- **Phase 4** — ritual charge becomes an egg.
+
+The domain layer imports nothing — no React, no React Native, no database — so its **610 tests run in plain Node at 98% coverage.** The emulator still found bugs the tests could not, twice, and both rounds are in the log.
+
+## Decision 21: the whole shell goes 8-bit
+
+Midway, the visual direction changed: the entire shell became 8-bit. That decision cost a pixel generator and an atlas pipeline — and then paid for itself. All 48 species were drawn, then hatchlings, juveniles and the remaining stages: **four life stages for all forty-eight.** Most of those frames are *derived*. Breathing is computed, not drawn. Cerberus has three heads, which the derivation had to learn about.
+
+## Making it feel like something
+
+The last days were about texture: a companion you choose, a monument that sits instead of floating, twelve marks in the companion's hand, two sentences and five names for each species. Time started to pass, and every cost got a way back. A year of days became a hexagon map, and both the record and an ascended creature's epitaph can leave the phone as an image.
+
+## The cleanup a store asks for
+
+Before monetization went in, one finding stood out: *a focus app was asking for the microphone.* It stopped. Permissions went from fourteen to seven. Then Decision 22 — ads and a Remove Ads purchase — under a studio name, with three release profiles.

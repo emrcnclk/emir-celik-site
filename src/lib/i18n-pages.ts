@@ -285,14 +285,18 @@ export const pagesUi = {
   },
   projects: {
     en: {
-      kicker: "Sec. 02 — Hangar · live from GitHub",
-      title: "Built, shipped, standing.",
-      lede: "Repos refresh from github.com/emrcnclk. Click a title to open the source — the hangar stays current.",
+      kicker: "Sec. 02 — The bounty board",
+      title: "Wanted: dead or alive.",
+      lede: "Every project is a bounty. The price is honest — commits × ₩250,000. Open a poster for the case file: the story, the clips, the stills and the devlogs.",
+      others: "Small fry",
+      othersKicker: "Other repos, live from GitHub",
     },
     tr: {
-      kicker: "Böl. 02 — Hangar · GitHub’dan canlı",
-      title: "Yapıldı, yayında, ayakta.",
-      lede: "github.com/emrcnclk üzerinden yenilenir. Başlığa tıkla, kaynağı aç — hangar güncel kalır.",
+      kicker: "Böl. 02 — Ödül panosu",
+      title: "Aranıyor: ölü ya da diri.",
+      lede: "Her proje bir ödül. Fiyat dürüst — commit × ₩250.000. Dosyayı açmak için bir postere tıkla: hikâye, klipler, kareler ve devloglar.",
+      others: "Küçük balıklar",
+      othersKicker: "Diğer repolar, GitHub’dan canlı",
     },
   },
   now: {
@@ -441,15 +445,15 @@ export const pagesUi = {
   },
   devlogs: {
     en: {
-      kicker: "Sec. 11 — Build notes",
-      title: "The making of.",
-      lede: "Work in public, with the dead ends left in. Each log covers real decisions from real builds — what worked, what cost a week, what I'd do differently.",
+      kicker: "Sec. 11 — Session logs",
+      title: "The sessions.",
+      lede: "Devlogs written from the commit logs on my machine — real dates, real decisions, the dead ends left in. Every session has a Turkish edition.",
       empty: "Nothing here yet. The tape is still recording.",
     },
     tr: {
-      kicker: "Böl. 11 — Build notları",
-      title: "Yapılışı.",
-      lede: "Kamuya açık iş, çıkmaz sokaklar dahil. Her log gerçek build’lerden gerçek kararlar — ne işe yaradı, ne bir haftaya mal oldu, neyi farklı yapardım.",
+      kicker: "Böl. 11 — Seans kayıtları",
+      title: "Seanslar.",
+      lede: "Bilgisayarımdaki commit geçmişlerinden yazılmış devloglar — gerçek tarihler, gerçek kararlar, çıkmaz sokaklar dahil. Her seansın İngilizce ve Türkçe baskısı var.",
       empty: "Henüz bir şey yok. Bant hâlâ kayıtta.",
     },
   },

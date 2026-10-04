@@ -1,4 +1,7 @@
-import { PostIndex } from "@/components/post/post-index";
+import { Container } from "@/components/ui/container";
+import { PageHeader } from "@/components/ui/page-header";
+import { SessionRow } from "@/components/cards/session-row";
+import { getPosts } from "@/lib/content";
 import { getPageUi } from "@/lib/i18n-pages";
 import { resolvePageLang } from "@/lib/i18n-server";
 import { pageMetadata } from "@/lib/seo";
@@ -6,7 +9,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Devlogs",
   description:
-    "Build notes from active projects: decisions, dead ends, benchmarks and honest postmortems.",
+    "Session logs from Blood Moon, Idle Pixel Hero, GMRLOG, Mythkeep and BlockSlide — written from the commit history, in English and Turkish.",
   path: "/devlogs",
 });
 
@@ -17,15 +20,22 @@ export default async function DevlogsPage({
 }) {
   const lang = await resolvePageLang(searchParams);
   const ui = getPageUi("devlogs", lang);
+  const posts = getPosts("devlogs", lang);
 
   return (
-    <PostIndex
-      collection="devlogs"
-      kicker={ui.kicker}
-      title={ui.title}
-      lede={ui.lede}
-      empty={ui.empty}
-      lang={lang}
-    />
+    <>
+      <PageHeader kicker={ui.kicker} title={ui.title} lede={ui.lede} />
+      <Container size="wide" className="pb-32">
+        {posts.length === 0 ? (
+          <p className="border-t border-line pt-10 font-mono text-sm text-faint">{ui.empty}</p>
+        ) : (
+          <ul className="border-b border-line">
+            {posts.map((post, i) => (
+              <SessionRow key={post.slug} post={post} index={i} lang={lang} />
+            ))}
+          </ul>
+        )}
+      </Container>
+    </>
   );
 }

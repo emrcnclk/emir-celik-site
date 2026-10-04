@@ -1,0 +1,34 @@
+---
+title: "Six days to a four-player night"
+description: "Blood Moon: a co-op survivors game whose simulation never touches Unity, a binary snapshot protocol, split screen that merges, and a PixelLab art pipeline."
+date: "2026-10-03"
+tags: ["blood moon", "unity", "netcode", "co-op", "pixel art"]
+project: "blood-moon"
+session: 9
+cover: "/work/blood-moon/cover.webp"
+---
+
+Blood Moon — *Kan Ayı* in the repository — is a survivors game for one to four players. Online play runs on Steam lobbies and invites; up to four people can share one screen; and the two mix. Levelling up does not pause the game: each player picks their card while the night keeps coming.
+
+## Day one: the architecture is the game
+
+The first commit added the game *and* its art pipeline, and the structure has not moved since:
+
+- `Core/` — a pure C# simulation, content data and meta progression. No Unity.
+- `Net/` — a binary protocol, a snapshot encoder, host and client sessions.
+- `Game/` — the Unity layer: boot, input, split screen, drawing, VFX, sound, UI, Steam and LAN.
+- `tools/CoreSim` — simulation, network and meta tests, plus balance bots, all without opening Unity.
+
+Because the simulation is plain C#, the same tick runs for a solo run, a LAN host and a Steam lobby, and a bot can play a thousand runs to tell me a weapon is too strong.
+
+## Days two to four: making it a game
+
+Split screen merges back into one view when players are together. Controllers of every kind work, with button prompts per controller and vibration. Player shots break on walls, and aimed attacks prefer what they can see; walls hurt a little when you hug them, themed per map. Every final boss got its own art. Props, chests, a travelling merchant and Blood Altars — clear the area, watch the timer, follow the off-screen arrow. **53 Steam achievements**, each with a PixelLab icon.
+
+The art pipeline is a manifest: `pixellab.json` lists what to generate, and the output lands in `Resources/Art`. Generated art is a draft. There are commits for walk cycles that faced the wrong way, a bat whose wings were cut off, sprites standing on their bottom padding instead of their feet, and props redrawn without the ground block the generator kept painting under them.
+
+## Days five and six: depth
+
+Luck with no cap — rarer level-up cards, luck skills, luck items. Endless runs, curses, daily and weekly challenges, eleven languages. A store page with capsules, screenshots and clips. Then lobby passwords and a player limit, co-op synergies with a shared purse and chests, two new characters — the Gambler and the Vampire — and weapon and passive slots bought in the shop, from two up to five.
+
+The last commit made the first four and a half minutes calmer, and chained the maps: win the Graveyard to open Frostwood, then the Bone Crypt, then Hell Gate.

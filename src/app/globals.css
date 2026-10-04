@@ -24,6 +24,13 @@
   --cyan: #5abec8; /* rain-sign cyan */
   --signal: #c4574e; /* recording light */
 
+  /* Bebop opening-title flats — the "Tank!" panels */
+  --mustard: #e3b23c;
+  --teal: #2f7f86;
+  --rust: #b8432f;
+  --cream: #efe3c6;
+  --ink: #0c0b0a;
+
   --radius: 2px;
 }
 
@@ -41,10 +48,17 @@
   --color-amber: var(--amber);
   --color-cyan: var(--cyan);
   --color-signal: var(--signal);
+  --color-mustard: var(--mustard);
+  --color-teal: var(--teal);
+  --color-rust: var(--rust);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
 
   --font-display: "Fraunces Variable", "Georgia", serif;
   --font-sans: var(--font-geist-sans), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), "SFMono-Regular", monospace;
+  --font-bebop: "Bebas Neue", "Impact", "Arial Narrow", sans-serif;
+  --font-type: "Special Elite", "Courier New", monospace;
 
   /* Type scale — editorial, generous */
   --text-kicker: 0.6875rem;
@@ -60,6 +74,14 @@
   --animate-flicker: flicker 4s linear infinite;
   --animate-drift: drift 24s ease-in-out infinite alternate;
   --animate-scan: scan 9s linear infinite;
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-marquee-fast: marquee 22s linear infinite;
+  --animate-spin-slow: spin 14s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
 
 @keyframes flicker {
@@ -286,4 +308,78 @@ html[data-spike-cursor="true"] input[type="radio"] {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Bebop layer — opening-title type, posters, tape                    */
+/* ------------------------------------------------------------------ */
+
+@utility bebop {
+  font-family: var(--font-bebop);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 0.86;
+  text-transform: uppercase;
+}
+
+@utility typewriter {
+  font-family: var(--font-type);
+  letter-spacing: 0.02em;
+}
+
+/* Halftone dots — the printed-poster grain on bounty cards */
+@utility halftone {
+  background-image: radial-gradient(rgba(12, 11, 10, 0.22) 1px, transparent 1.2px);
+  background-size: 5px 5px;
+}
+
+/* Pixel art keeps its pixels */
+@utility pixelated {
+  image-rendering: pixelated;
+}
+
+/* Hollow display type */
+@utility outline-text {
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1.5px currentColor;
+}
+
+/* Scene cut between pages: three bars sweep off to the right.
+   Plain CSS so the page is never left covered if scripts are slow. */
+.scene-wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+}
+.scene-wipe > span {
+  flex: 1;
+  transform-origin: right;
+  transform: scaleX(0);
+  animation: scene-wipe 0.55s cubic-bezier(0.7, 0, 0.2, 1) both;
+}
+.scene-wipe > span:nth-child(1) { background: var(--mustard); }
+.scene-wipe > span:nth-child(2) { background: var(--rust); animation-delay: 0.06s; }
+.scene-wipe > span:nth-child(3) { background: var(--teal); animation-delay: 0.12s; }
+
+@keyframes scene-wipe {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-fast,
+  .animate-spin-slow {
+    animation: none !important;
+  }
+  .scene-wipe {
+    display: none;
+  }
+}
+
+html[data-opening="skip"] .opening {
+  display: none;
 }

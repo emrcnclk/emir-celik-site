@@ -1,0 +1,30 @@
+---
+title: "A profile that answers one question"
+description: "Two weeks on GMRLOG's design system, a taste-match engine that shows its work, and sign-in with Google, Discord and Steam."
+date: "2026-08-14"
+tags: ["gmrlog", "design systems", "typescript", "oauth"]
+project: "gmrlog-app"
+session: 1
+---
+
+GMRLOG has a North Star, and it is locked: a profile should answer *what kind of player is this?* the moment it opens. Everything in the first two weeks of August was measured against that sentence.
+
+## The palette came first
+
+The sprint opened by re-valuing the dark and light palettes and giving the app one plasma accent. Then a rule that sounds small and is not: **rarity is encoded as geometry, not colour alone.** A legendary badge has a different shape from a common one, so the information survives colour blindness, bad screens and screenshots.
+
+The same pass turned up honest bugs. A toggle knob that "animated" but whose interpolation never advanced. A scrim that hard-coded black instead of reading its token. A cover that faked depth with a shadow when it should have been built from the surface. Each fix went in with the audit that found it.
+
+## Screens, recomposed
+
+From there it was screen by screen — Achievements, Settings, Notifications, Messages, Discover, Profile, Register, Onboarding, Circles — each rebuilt on shared pieces instead of local copies. Profile was recomposed around a *player record card*; Register and Onboarding moved onto one shared auth shell. Tier lists got drag-to-reorder. The review composer became a writing surface rather than a form.
+
+## A match that shows its working
+
+The feature I like most is DNA match. Two players get a similarity score — but the engine was changed to return **a breakdown, not just a score**, and the components are persisted. On a public profile the panel shows *why* you match, and it is gated to individual accounts. A number with no reasons is a horoscope.
+
+## Signing in
+
+Account matching first, then Google, then Discord, then Steam. Steam had a trap: a self-reported Steam ID could be used to squat someone else's account. That path was closed, and later refused outright outside development. Settings gained connect and disconnect, with a guard that will not let you remove your last way in.
+
+The session closed with an accessibility pass on the DNA panel and its progress bars, and a full check: **33 of 33 turbo tasks green.**

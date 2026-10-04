@@ -1,0 +1,29 @@
+---
+title: "Ekranın bir şeridi"
+description: "Idle Pixel Hero'nun ilk üç günü: tıklamayı arkaya geçiren bir widget, kendi denge araçları olan bir simülasyon ve onarılan 42.327 kenar."
+date: "2026-09-09"
+tags: ["idle pixel hero", "unity", "c#", "pixel art"]
+project: "idle-pixel-hero"
+session: 4
+cover: "/work/idle-pixel-hero/shot-2.webp"
+---
+
+Fikir bir yapışkan nota sığıyor: masaüstünde ince bir şeritte yaşayan ve sen çalışırken savaşmaya devam eden bir RPG. Şerit tıklamaları altındaki pencereye geçiriyor, hep üstte kalıyor, tam ekran bir oyun ya da video açılınca gizleniyor ve neredeyse hiç CPU kullanmıyor. Karar vermek istediğinde aynı pencere **Karargâh**'a dönüşüyor.
+
+## İlk gün: tek commit'te üç şey
+
+İlk commit'in başlığı *widget, simülasyon ve denge araçları* ve bu sıra önemli. Simülasyon şerit olmadan çalıştırılıp ölçülebilecek şekilde yazıldı — `sim boss` tek bir dövüşü baştan sona izliyor ve ikinci gün boss temposu hakkında yazdığım bir iddiayı çürüttü. Düzeltilen iz değil, iddia oldu.
+
+## Bir arada duran görseller
+
+Bölgeler üretildi — bataklık, buzul, volkan, sonra gökyüzü, boşluk ve bütün kadrolar — ve üretilen görseller kayar. Bu yüzden bir temizlik turu yapıldı, sonra da temizlik turunun "tahmin etmek yerine" denetimi. Sonuç: **paletin dışında sıfır renk ve onarılan 42.327 kenar**, ve projenin gerçekte dönüştüğü oyunu kapsayacak şekilde yeniden kurulan bir palet.
+
+İşin bir kısmı şeyleri *görünür* kılmaktı: bakmaya değer bir boss kupası düşüşü, görülecek kadar uzun bir kupa patlaması, kupa yağmurunu saklayan bir banner. Bunların her biri, boss öfkesiyle birlikte, bu iş için yazılmış araçlarla kaydedildi.
+
+## Yayın engelleri, erkenden
+
+İkinci günün sonunda *yayın engelleri: bir çıkış yolu, bir giriş yolu ve beyaz flaş yok* adlı bir liste vardı. Sonra: dokuz dil ve çizemediğini kabul eden bir font. Yalnızca birinin işini bölmeye değecek dört şey için ses. Başarımlar — Steam onlardan yalnızca *haberdar edilen* bir şey olarak — ve yanlışlıkla verildiği için geri alınan bir başarım.
+
+Hiç testi olmayan dört assembly'ye ve hatası telafi edilemeyen iki katmana testler girdi: kaydetme ve yükleme. İkinci prestige katmanı yazıldı ve kapalı olarak gönderildi.
+
+Üçüncü gün Steamworks.NET kuruldu ve Steam katmanı ilk kez derlendi.
